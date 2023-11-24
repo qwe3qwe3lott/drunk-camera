@@ -3,6 +3,7 @@ import {Camera} from "expo-camera";
 import {useCallback, useRef} from "react";
 import {Ionicons} from "@expo/vector-icons";
 import * as MediaLibrary from 'expo-media-library'
+import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
 
 export default function () {
     const cameraRef = useRef<Camera>(null)
@@ -10,9 +11,16 @@ export default function () {
     const takePicture = useCallback(async () => {
         if (cameraRef.current) {
             try {
-                const picture = await cameraRef.current.takePictureAsync();
+                const image = await cameraRef.current.takePictureAsync();
 
-                await MediaLibrary.createAssetAsync(picture.uri);
+                const processedImage = await manipulateAsync(
+                    image.uri,
+                    [{ rotate: 45 }],
+                    { compress: 1, format: SaveFormat.PNG }
+                );
+
+                await MediaLibrary.createAssetAsync(image.uri);
+                await MediaLibrary.createAssetAsync(processedImage.uri);
             } catch (e) {
                 console.log(e);
 
