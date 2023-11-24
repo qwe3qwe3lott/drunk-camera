@@ -1,22 +1,11 @@
-import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
-import {Camera, PermissionStatus} from "expo-camera";
-import {useCallback, useLayoutEffect, useRef, useState} from "react";
+import {StyleSheet, View, TouchableOpacity} from "react-native";
+import {Camera} from "expo-camera";
+import {useCallback, useRef} from "react";
 import {Ionicons} from "@expo/vector-icons";
 import * as MediaLibrary from 'expo-media-library'
 
 export default function () {
     const cameraRef = useRef<Camera>(null)
-    // const [cameraPermission, requestCameraPermission] = Camera.useCameraPermissions();
-    const [permissions, requestPermissions] = MediaLibrary.usePermissions();
-
-    const hasPermission = !!permissions?.granted;
-
-    useLayoutEffect(() => {
-        (async () => {
-            await requestPermissions();
-            // await requestCameraPermission();
-        })()
-    }, []);
 
     const takePicture = useCallback(async () => {
         if (cameraRef.current) {
@@ -33,12 +22,11 @@ export default function () {
     }, [])
 
     return <View style={styles.container}>
-        {hasPermission && <Camera style={styles.camera} ref={cameraRef}>
+        <Camera style={styles.camera} ref={cameraRef}>
             <TouchableOpacity onPress={takePicture}>
                 <Ionicons size={40} name="camera"/>
             </TouchableOpacity>
-        </Camera>}
-        {!hasPermission && <Text>Has no permission</Text>}
+        </Camera>
     </View>
 }
 

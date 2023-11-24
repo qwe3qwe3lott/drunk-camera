@@ -1,9 +1,10 @@
 import {Text, View} from "react-native";
 
-export default function () {
+export default function() {
     return <View>
         <Text>
-            История
+            Информация
         </Text>
     </View>
 }
+
