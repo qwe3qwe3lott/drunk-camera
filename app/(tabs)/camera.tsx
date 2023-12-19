@@ -50,7 +50,8 @@ export default function () {
                     width: processedImage.width,
                     height: processedImage.height,
                     uri: processedImage.uri,
-                    angle
+                    angle,
+                    dateTime: new Date().toISOString()
                 })
             } catch (e) {
                 console.log(e);
@@ -63,7 +64,9 @@ export default function () {
     return <View style={styles.container}>
         <Camera style={styles.camera} ref={cameraRef}>
             <TouchableOpacity onPress={takePicture}>
-                <Ionicons size={40} name="camera"/>
+                <View style={styles.buttonWrapper}>
+                    <View style={styles.button}/>
+                </View>
             </TouchableOpacity>
         </Camera>
     </View>
@@ -81,5 +84,21 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-end",
         padding: 24
+    },
+    button: {
+        height: 50,
+        width: 50,
+        backgroundColor: '#024989',
+        borderRadius: 50
+    },
+    buttonWrapper: {
+        height: 70,
+        width: 70,
+        borderRadius: 70,
+        backgroundColor: 'white',
+        flex: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: 0.75
     }
 })

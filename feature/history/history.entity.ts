@@ -4,4 +4,5 @@ export type HistoryItem = {
     width: number;
     uri: string;
     angle: number;
+    dateTime: string;
 }

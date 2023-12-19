@@ -2,12 +2,13 @@ import {Tabs} from "expo-router";
 import {Ionicons} from "@expo/vector-icons";
 import {StyleSheet} from "react-native";
 import {Text} from "react-native";
+import {Header} from "../../feature/layout/components/Header";
 
 export default function () {
     return <Tabs>
-        <Tabs.Screen name="info" options={{tabBarLabel: ({focused}) => (<Text style={{...styles.label, ...(focused && styles.focusedLabel)}}>Главная</Text>), unmountOnBlur: true, title: "Главная", tabBarIcon: ({focused}) => (<Ionicons name="home" size={20} color={focused ? 'black' : 'gray'}/>)}}/>
+        <Tabs.Screen name="info" options={{ tabBarLabel: ({focused}) => (<Text style={{...styles.label, ...(focused && styles.focusedLabel)}}>Главная</Text>), unmountOnBlur: true, header: () => <Header text="Главная"/>, tabBarIcon: ({focused}) => (<Ionicons name="home" size={20} color={focused ? 'black' : 'gray'}/>)}}/>
         <Tabs.Screen name="camera" options={{tabBarLabel: ({focused}) => (<Text style={{...styles.label, ...(focused && styles.focusedLabel)}}>Камера</Text>), unmountOnBlur: true, headerShown: false, tabBarIcon: ({focused}) => (<Ionicons name="camera" size={20} color={focused ? 'black' : 'gray'}/>)}}/>
-        <Tabs.Screen name="history" options={{tabBarLabel: ({focused}) => (<Text style={{...styles.label, ...(focused && styles.focusedLabel)}}>История</Text>), unmountOnBlur: true, title: "История", tabBarIcon: ({focused}) => (<Ionicons name="time" size={20} color={focused ? 'black' : 'gray'}/>)}}/>
+        <Tabs.Screen name="history" options={{tabBarLabel: ({focused}) => (<Text style={{...styles.label, ...(focused && styles.focusedLabel)}}>История</Text>), unmountOnBlur: true, headerShown: false, title: "История", tabBarIcon: ({focused}) => (<Ionicons name="time" size={20} color={focused ? 'black' : 'gray'}/>)}}/>
     </Tabs>
 }
 
